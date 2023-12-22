@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weathervane/utility/const.dart';
+import 'package:weathervane/widget/detail_temp.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -11,6 +12,9 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home>{
+  int feels_like = 14;
+  int max_temp = 23;
+  int min_temp= 12;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +38,30 @@ class HomeState extends State<Home>{
               Text('Clear Sky',style: kh3TextStyle,),
 
 
-              //
+              //details temperature
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      detailTemp(temp_value: feels_like, tempStatus: 'Feels Like'),
+                      VerticalDivider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      ),
 
+                      detailTemp(temp_value: max_temp, tempStatus: 'Max Temp'),
+                      VerticalDivider(
+                        thickness: 2,
+                        color: Colors.grey,
+
+                      ),
+                      detailTemp(temp_value: min_temp, tempStatus: 'Min Temp'),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
