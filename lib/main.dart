@@ -14,6 +14,7 @@ class Weathervane extends StatelessWidget{
       theme: ThemeData.dark(
 
       ).copyWith(
+        scaffoldBackgroundColor: Colors.blueGrey.shade900,
         appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
