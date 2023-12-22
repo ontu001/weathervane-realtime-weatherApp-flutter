@@ -19,6 +19,7 @@ class HomeState extends State<Home>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('New York, USA',style: kh1TextStyle,),
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.location_on_outlined,color: kCommonColor,))

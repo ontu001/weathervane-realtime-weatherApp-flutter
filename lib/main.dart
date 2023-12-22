@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weathervane/screen/home.dart';
+
 import 'package:weathervane/screen/splash.dart';
+import 'package:weathervane/widget/bottom_nav_bar.dart';
 
 void main()=>runApp(Weathervane());
 class Weathervane extends StatelessWidget{
@@ -20,7 +21,7 @@ class Weathervane extends StatelessWidget{
         ),
       ),
 
-      home: Home(),
+      home: bottomNavBar(),
     );
   }
 
