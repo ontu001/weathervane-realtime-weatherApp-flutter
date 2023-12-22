@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weathervane/screen/home.dart';
 import 'package:weathervane/utility/const.dart';
+import 'package:weathervane/widget/bottom_nav_bar.dart';
 import 'package:weathervane/widget/input_files.dart';
 
 class Search extends StatefulWidget{
@@ -20,7 +22,15 @@ class SearchState extends State<Search>{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Align(alignment: Alignment.topLeft,child: Text('Your Desire City',style: kh1TextStyle,)),
+              Row(
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>bottomNavBar()));
+                  }, icon: Icon(Icons.arrow_back_ios,color: kCommonColor,)),
+                  SizedBox(width: 20,),
+                  Text('Your Desire City',style: kh1TextStyle,),
+                ],
+              ),
 
 
              Padding(padding: EdgeInsets.symmetric(vertical: 20),child: inputFiled()),
