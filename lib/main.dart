@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weathervane/screen/get_location_screen.dart';
 
 import 'package:weathervane/screen/splash.dart';
 import 'package:weathervane/widget/bottom_nav_bar.dart';
@@ -22,7 +23,7 @@ class Weathervane extends StatelessWidget{
         ),
       ),
 
-      home: bottomNavBar(),
+      home: GetLocation(),
     );
   }
 

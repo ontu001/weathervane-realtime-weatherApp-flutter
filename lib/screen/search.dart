@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weathervane/screen/home.dart';
 import 'package:weathervane/utility/const.dart';
 import 'package:weathervane/widget/bottom_nav_bar.dart';
 import 'package:weathervane/widget/input_files.dart';
@@ -38,7 +37,6 @@ class SearchState extends State<Search>{
                 height: 60,
                 width: 200,
                 child: ElevatedButton(style: ButtonStyle(
-
                   backgroundColor: MaterialStateProperty.all(kCommonColor)
                 ),onPressed: (){}, child: Text('Search',style: TextStyle(color: Colors.blueGrey.shade900),)),
               )
