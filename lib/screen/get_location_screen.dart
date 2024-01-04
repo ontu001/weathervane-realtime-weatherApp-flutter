@@ -1,37 +1,57 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weathervane/Service/location.dart';
+import 'package:weathervane/Service/network.dart';
+import 'package:weathervane/screen/home.dart';
 
 class GetLocation extends StatefulWidget{
+  const GetLocation({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return GetLocationState();
   }
 
 }
+const apiKey = "94d21ac82a90c89d510c3c9830b53652";
 
 class GetLocationState extends State<GetLocation>{
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getlocation();
+    getLocationWeatherData();
+
+
   }
 
-
-  void getlocation() async{
-    Location location =Location();
+  void getLocationWeatherData ()async{
+    Location location = Location();
     await location.getLocation();
-    print(location.longi);
-    print(location.latti);
+    String url ="https://api.openweathermap.org/data/2.5/weather?lat=${location.latti}&lon=${location.longi}&appid=$apiKey";
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var WeatherData = await networkHelper.getData();
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        child: Center(
+          child: SpinKitDoubleBounce(
+            size: 80.0,
+            color: Colors.black26,
+          ),
+        ),
+      ),
     );
   }
 
 }
+
+
+

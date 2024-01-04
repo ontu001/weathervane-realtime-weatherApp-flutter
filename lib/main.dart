@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weathervane/screen/get_location_screen.dart';
 
-import 'package:weathervane/screen/splash.dart';
-import 'package:weathervane/widget/bottom_nav_bar.dart';
 
-void main()=>runApp(Weathervane());
+void main()=>runApp(const Weathervane());
 class Weathervane extends StatelessWidget{
+  const Weathervane({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,14 +15,14 @@ class Weathervane extends StatelessWidget{
 
       ).copyWith(
         scaffoldBackgroundColor: Colors.blueGrey.shade900,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
       ),
 
-      home: GetLocation(),
+      home: const GetLocation(),
     );
   }
 

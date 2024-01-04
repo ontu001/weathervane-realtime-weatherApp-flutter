@@ -1,11 +1,12 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weathervane/screen/home.dart';
 import 'package:weathervane/screen/search.dart';
 import 'package:weathervane/utility/const.dart';
 
 class bottomNavBar extends StatefulWidget{
+  const bottomNavBar({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return bottomNavBarState();
@@ -15,8 +16,8 @@ class bottomNavBar extends StatefulWidget{
 class bottomNavBarState extends State<bottomNavBar>{
   int _currentIndex = 0;
   final _pages= [
-    Home(),
-    Search(),
+    const Home(),
+    const Search(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,8 +25,8 @@ class bottomNavBarState extends State<bottomNavBar>{
 
       bottomNavigationBar: FloatingNavbar(
         iconSize: 12,
-        margin: EdgeInsets.all(0),
-        padding: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.all(0),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         borderRadius: 20.0,
          itemBorderRadius: 20.0,
         selectedItemColor: Colors.black,

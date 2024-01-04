@@ -38,6 +38,7 @@ dependencies:
   floating_bottom_navigation_bar: ^1.5.2
   geolocator: ^10.1.0
   http: ^1.1.2
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:

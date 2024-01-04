@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weathervane/utility/const.dart';
 import 'package:weathervane/widget/bottom_container.dart';
@@ -6,6 +5,8 @@ import 'package:weathervane/widget/detail_screen_container.dart';
 import 'package:weathervane/widget/detail_temp.dart';
 
 class Home extends StatefulWidget{
+  const Home({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return HomeState();
@@ -23,40 +24,40 @@ class HomeState extends State<Home>{
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('New York, USA',style: kh1TextStyle,),
+        title: const Text('New York, USA',style: kh1TextStyle,),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.location_on_outlined,color: kCommonColor,))
+          IconButton(onPressed: (){}, icon: const Icon(Icons.location_on_outlined,color: kCommonColor,))
         ],
       ),
 
 
 
       body: Padding(
-        padding: EdgeInsets.only(left: 13,right: 13,top: 8,bottom: 85),
+        padding: const EdgeInsets.only(left: 13,right: 13,top: 8,bottom: 85),
         child: Center(
           child: Column(
             children: [
-              Text('Today, 22 December',style: TextStyle(color: kCommonColor),),
-          SizedBox(height: 30,),
-              Text('19°',style: kTempTextStyle,),
-              Text('Clear Sky',style: kh3TextStyle,),
+              const Text('Today, 22 December',style: TextStyle(color: kCommonColor),),
+          const SizedBox(height: 30,),
+              const Text('19°',style: kTempTextStyle,),
+              const Text('Clear Sky',style: kh3TextStyle,),
 
 
               //details temperature
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: IntrinsicHeight(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       detailTemp(temp_value: feels_like, tempStatus: 'Feels Like'),
-                      VerticalDivider(
+                      const VerticalDivider(
                         thickness: 2,
                         color: Colors.grey,
                       ),
 
                       detailTemp(temp_value: max_temp, tempStatus: 'Max Temp'),
-                      VerticalDivider(
+                      const VerticalDivider(
                         thickness: 2,
                         color: Colors.grey,
 

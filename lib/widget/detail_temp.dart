@@ -5,7 +5,7 @@ class detailTemp extends StatelessWidget{
   final String tempStatus;
   final int temp_value;
 
-  detailTemp({required this.temp_value, required this.tempStatus});
+  const detailTemp({super.key, required this.temp_value, required this.tempStatus});
   @override
   Widget build(BuildContext context) {
     return Expanded(
