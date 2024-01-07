@@ -6,6 +6,8 @@ import 'package:weathervane/utility/const.dart';
 import 'package:weathervane/widget/bottom_container.dart';
 import 'package:weathervane/widget/detail_screen_container.dart';
 import 'package:weathervane/widget/detail_temp.dart';
+import 'package:intl/intl.dart';
+
 
 class Home extends StatefulWidget{
    final CurrentLoactionWeather;
@@ -68,6 +70,7 @@ updateUI(widget.CurrentLoactionWeather);
 
 
 
+
    });
 
   }
@@ -106,7 +109,7 @@ updateUI(widget.CurrentLoactionWeather);
         child: Center(
           child: Column(
             children: [
-               Text('$time',style: TextStyle(color: kCommonColor),),
+               Text(DateFormat('EEEE, MMMM d, y').format(time),style: TextStyle(color: kCommonColor),),
            SizedBox(height: 30,),
                Text('$temperature°',style: kTempTextStyle,),
                Text( status,style: kh3TextStyle,),
