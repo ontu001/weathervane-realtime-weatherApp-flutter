@@ -22,7 +22,7 @@ class Weathervane extends StatelessWidget{
         ),
       ),
 
-      home: const GetLocation(),
+      home: GetLocation(),
     );
   }
 

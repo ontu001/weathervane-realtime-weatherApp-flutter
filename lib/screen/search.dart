@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weathervane/utility/const.dart';
-import 'package:weathervane/widget/bottom_nav_bar.dart';
 import 'package:weathervane/widget/input_files.dart';
+
+import 'home.dart';
 
 class Search extends StatefulWidget{
   const Search({super.key});
@@ -18,22 +19,22 @@ class SearchState extends State<Search>{
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding:  EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
                   IconButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const bottomNavBar()));
-                  }, icon: const Icon(Icons.arrow_back_ios,color: kCommonColor,)),
-                  const SizedBox(width: 20,),
-                  const Text('Your Desire City',style: kh1TextStyle,),
+                  Navigator.pop(context);
+                  }, icon:  Icon(Icons.arrow_back_ios,color: kCommonColor,)),
+                   SizedBox(width: 20,),
+                   Text('Your Desire City',style: kh1TextStyle,),
                 ],
               ),
 
 
-             const Padding(padding: EdgeInsets.symmetric(vertical: 20),child: inputFiled()),
+              Padding(padding: EdgeInsets.symmetric(vertical: 20),child: inputFiled()),
               SizedBox(
                 height: 60,
                 width: 200,
