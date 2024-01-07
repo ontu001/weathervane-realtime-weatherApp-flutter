@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:weathervane/Service/weather.dart';
 import 'package:weathervane/screen/search.dart';
 import 'package:weathervane/utility/const.dart';
 import 'package:weathervane/widget/bottom_container.dart';
@@ -18,26 +20,69 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home>{
-  double temperature =0;
-  int feels_like = 14;
-  int max_temp = 23;
-  int min_temp= 12;
-  int humidity = 22;
+  int temperature =0;
+  int feels_like = 0;
+  int max_temp = 0;
+  int min_temp= 0;
+  int humidity = 0;
+  int wind_speed = 0;
+  int visibility = 0;
+  int pressure = 0;
+  String cityName ='error';
+  String status ='error';
+late  var time;
 
   @override
   void initState() {
     super.initState();
-var data = widget.CurrentLoactionWeather;
-temperature = data['main']['temp'];
+
+updateUI(widget.CurrentLoactionWeather);
+
   }
+
+  void updateUI(dynamic weatherData){
+   setState(() {
+      cityName = weatherData['name'];
+      status = weatherData['weather'][0]['description'];
+     double temp = weatherData['main']['temp'];
+     temperature =temp.toInt();
+
+
+     double fl = weatherData['main']['feels_like'];
+     feels_like= fl.toInt();
+
+     double mxt = weatherData['main']['temp_max'];
+     max_temp = mxt.toInt();
+
+     double mnt = weatherData['main']['temp_min'];
+     min_temp =mnt.toInt();
+
+     humidity = weatherData['main']['humidity'];
+     visibility = weatherData['visibility'];
+     pressure = weatherData['main']['pressure'];
+
+     double wspd= weatherData['wind']['speed'];
+     wind_speed =wspd.toInt();
+
+     time = DateTime.now();
+
+
+
+   });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:  Text('New York, USA',style: kh1TextStyle,),
+        title:  Text(cityName,style: kh1TextStyle,),
         actions: [
-          IconButton(onPressed: (){}, icon:  Icon(Icons.location_on_outlined,color: kCommonColor,))
+          IconButton(onPressed: () async{
+            var WeatherData = await WeatherModel().getLocationWeather();
+            updateUI(WeatherData);
+          }, icon:  Icon(Icons.location_on_outlined,color: kCommonColor,))
         ],
       ),
 
@@ -61,10 +106,10 @@ temperature = data['main']['temp'];
         child: Center(
           child: Column(
             children: [
-               Text('Today, 22 December',style: TextStyle(color: kCommonColor),),
+               Text('$time',style: TextStyle(color: kCommonColor),),
            SizedBox(height: 30,),
                Text('$temperature°',style: kTempTextStyle,),
-               Text('Clear Sky',style: kh3TextStyle,),
+               Text( status,style: kh3TextStyle,),
 
 
               //details temperature
@@ -109,7 +154,7 @@ temperature = data['main']['temp'];
                           valueName: 'Humidity',
                         ),
                         DetailScreenContainer(
-                          detailValue: '$humidity',
+                          detailValue: '$wind_speed',
                           path: 'assets/images/wind_speed.png',
                           valueName: 'Wind Speed',
                         ),
@@ -124,12 +169,12 @@ temperature = data['main']['temp'];
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         DetailScreenContainer(
-                          detailValue: '$humidity',
+                          detailValue: '$visibility',
                           path: 'assets/images/visibility.png',
                           valueName: 'Visibility',
                         ),
                         DetailScreenContainer(
-                          detailValue: '$humidity',
+                          detailValue: '$pressure',
                           path: 'assets/images/pressure.png',
                           valueName: 'Pressure',
                         ),
@@ -139,15 +184,10 @@ temperature = data['main']['temp'];
                     ),
                   ],
                 ),
-                              ),
+                ),
               ),
 
-
-              
-
-              
               //Search button
-
             ],
           ),
         ),

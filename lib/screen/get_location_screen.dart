@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weathervane/Service/location.dart';
 import 'package:weathervane/Service/network.dart';
+import 'package:weathervane/Service/weather.dart';
 import 'package:weathervane/screen/home.dart';
 
 //full api key
@@ -15,7 +16,7 @@ class GetLocation extends StatefulWidget{
   }
 
 }
-const apiKey = "94d21ac82a90c89d510c3c9830b53652";
+
 
 class GetLocationState extends State<GetLocation>{
 
@@ -29,11 +30,7 @@ class GetLocationState extends State<GetLocation>{
   }
 
   void getLocationWeatherData ()async{
-    Location location = Location();
-    await location.getLocation();
-    String url ="https://api.openweathermap.org/data/2.5/weather?lat=${location.latti}&lon=${location.longi}&appid=$apiKey";
-    NetworkHelper networkHelper = NetworkHelper(url);
-    var WeatherData = await networkHelper.getData();
+   var WeatherData = await WeatherModel().getLocationWeather();
     Navigator.push(context, MaterialPageRoute(builder: (context)=>Home( CurrentLoactionWeather: WeatherData)));
 
   }
