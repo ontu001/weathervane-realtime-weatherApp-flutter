@@ -1,5 +1,8 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:weathervane/Service/weather.dart';
 import 'package:weathervane/screen/search.dart';
 import 'package:weathervane/utility/const.dart';
@@ -7,6 +10,7 @@ import 'package:weathervane/widget/bottom_container.dart';
 import 'package:weathervane/widget/detail_screen_container.dart';
 import 'package:weathervane/widget/detail_temp.dart';
 import 'package:intl/intl.dart';
+import 'package:weathervane/widget/exit_dialogue.dart';
 
 
 class Home extends StatefulWidget{
@@ -22,6 +26,38 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home>{
+
+
+
+
+
+//exit dialogue function (fot getting out of app)
+  _getOutOFApp(){
+    if (Platform.isIOS){
+      try{
+        exit(0);
+      } catch(e){
+        print(e);
+      }
+    }else{
+      try{SystemNavigator.pop();}catch(e){print(e);}
+    }
+  }
+
+
+  exiDialogue(context){
+    showDialog(context: context,
+        builder: (context){
+          return Dialog(
+            child: exitDialogue(onPressed: _getOutOFApp,),
+          );
+        }
+    );
+  }
+
+
+//====================
+
   int temperature =0;
   int feels_like = 0;
   int max_temp = 0;
@@ -77,127 +113,133 @@ updateUI(widget.CurrentLoactionWeather);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title:  Text(cityName,style: kh1TextStyle,),
-        actions: [
-          IconButton(onPressed: () async{
-            var WeatherData = await WeatherModel().getLocationWeather();
-            updateUI(WeatherData);
-          }, icon:  Icon(Icons.location_on_outlined,color: kCommonColor,))
-        ],
-      ),
+    return WillPopScope(
+      onWillPop: (){
+        exiDialogue(context);
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title:  Text(cityName,style: kh1TextStyle,),
+          actions: [
+            IconButton(onPressed: () async{
+              var WeatherData = await WeatherModel().getLocationWeather();
+              updateUI(WeatherData);
+            }, icon:  Icon(Icons.location_on_outlined,color: kCommonColor,))
+          ],
+        ),
 
-      //search icon
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // Align to bottom left
-      floatingActionButton: FloatingActionButton(
+        //search icon
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // Align to bottom left
+        floatingActionButton: FloatingActionButton(
 
-        onPressed: () async{
-          var typeName = await Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
+          onPressed: () async{
+            var typeName = await Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
 
-          if(typeName != null) {
-            var wd = await WeatherModel().cityNameWeather(typeName);
-            updateUI(wd);
+            if(typeName != null) {
+              var wd = await WeatherModel().cityNameWeather(typeName);
+              updateUI(wd);
 
-          }
-        },
-        child: Icon(Icons.search, color: Colors.blueGrey.shade900, size: 30),
-        shape: CircleBorder(),
-        elevation: 0.0,
-        backgroundColor: kCommonColor,
-      ),
-
-
-
-      body: Padding(
-        padding:  EdgeInsets.only(left: 13,right: 13,top: 8,bottom: 85),
-        child: Center(
-          child: Column(
-            children: [
-               Text(DateFormat('EEEE, MMMM d, y').format(time),style: TextStyle(color: kCommonColor),),
-           SizedBox(height: 30,),
-               Text('$temperature°',style: kTempTextStyle,),
-               Text( status,style: kh3TextStyle,),
+            }
+          },
+          child: Icon(Icons.search, color: Colors.blueGrey.shade900, size: 30),
+          shape: CircleBorder(),
+          elevation: 0.0,
+          backgroundColor: kCommonColor,
+        ),
 
 
-              //details temperature
-              Padding(
-                padding:  EdgeInsets.only(top: 20.0,bottom: 30.0),
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      detailTemp(temp_value: feels_like, tempStatus: 'Feels Like'),
-                       VerticalDivider(
-                        thickness: 2,
-                        color: Colors.grey,
-                      ),
 
-                      detailTemp(temp_value: max_temp, tempStatus: 'Max Temp'),
-                       VerticalDivider(
-                        thickness: 2,
-                        color: Colors.grey,
+        body: Padding(
+          padding:  EdgeInsets.only(left: 13,right: 13,top: 8,bottom: 85),
+          child: Center(
+            child: Column(
+              children: [
+                 Text(DateFormat('EEEE, MMMM d, y').format(time),style: TextStyle(color: kCommonColor),),
+             SizedBox(height: 30,),
+                 Text('$temperature°',style: kTempTextStyle,),
+                 Text( status,style: kh3TextStyle,),
 
-                      ),
-                      detailTemp(temp_value: min_temp, tempStatus: 'Min Temp'),
-                    ],
+
+                //details temperature
+                Padding(
+                  padding:  EdgeInsets.only(top: 20.0,bottom: 30.0),
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        detailTemp(temp_value: feels_like, tempStatus: 'Feels Like'),
+                         VerticalDivider(
+                          thickness: 2,
+                          color: Colors.grey,
+                        ),
+
+                        detailTemp(temp_value: max_temp, tempStatus: 'Max Temp'),
+                         VerticalDivider(
+                          thickness: 2,
+                          color: Colors.grey,
+
+                        ),
+                        detailTemp(temp_value: min_temp, tempStatus: 'Min Temp'),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
 
-              //more info scrren
-              Expanded(
-                child: bottomContainer(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //more info scrren
+                Expanded(
+                  child: bottomContainer(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        DetailScreenContainer(
-                          detailValue: '$humidity',
-                           path: 'assets/images/humidity.png',
-                          valueName: 'Humidity',
-                        ),
-                        DetailScreenContainer(
-                          detailValue: '$wind_speed',
-                          path: 'assets/images/wind_speed.png',
-                          valueName: 'Wind Speed',
-                        ),
-
-
-                      ],
-                    ),
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          DetailScreenContainer(
+                            detailValue: '$humidity',
+                             path: 'assets/images/humidity.png',
+                            valueName: 'Humidity',
+                          ),
+                          DetailScreenContainer(
+                            detailValue: '$wind_speed',
+                            path: 'assets/images/wind_speed.png',
+                            valueName: 'Wind Speed',
+                          ),
 
 
-                    //===========
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        DetailScreenContainer(
-                          detailValue: '$visibility',
-                          path: 'assets/images/visibility.png',
-                          valueName: 'Visibility',
-                        ),
-                        DetailScreenContainer(
-                          detailValue: '$pressure',
-                          path: 'assets/images/pressure.png',
-                          valueName: 'Pressure',
-                        ),
+                        ],
+                      ),
 
 
-                      ],
-                    ),
-                  ],
+                      //===========
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          DetailScreenContainer(
+                            detailValue: '$visibility',
+                            path: 'assets/images/visibility.png',
+                            valueName: 'Visibility',
+                          ),
+                          DetailScreenContainer(
+                            detailValue: '$pressure',
+                            path: 'assets/images/pressure.png',
+                            valueName: 'Pressure',
+                          ),
+
+
+                        ],
+                      ),
+                    ],
+                  ),
+                  ),
                 ),
-                ),
-              ),
 
-              //Search button
-            ],
+                //Search button
+              ],
+            ),
           ),
         ),
       ),
