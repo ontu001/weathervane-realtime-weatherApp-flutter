@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weathervane/screen/splash.dart';
 
+void main() => runApp(const Weathervane());
 
-void main()=>runApp(const Weathervane());
-class Weathervane extends StatelessWidget{
+class Weathervane extends StatelessWidget {
   const Weathervane({super.key});
 
   @override
@@ -11,9 +11,7 @@ class Weathervane extends StatelessWidget{
     return MaterialApp(
       title: 'Weathervane',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(
-
-      ).copyWith(
+      theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.blueGrey.shade900,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -21,9 +19,7 @@ class Weathervane extends StatelessWidget{
           backgroundColor: Colors.transparent,
         ),
       ),
-
       home: Splash(),
     );
   }
-
 }
