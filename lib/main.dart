@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weathervane/screen/get_location_screen.dart';
+import 'package:weathervane/screen/splash.dart';
 
 
 void main()=>runApp(const Weathervane());
@@ -22,7 +22,7 @@ class Weathervane extends StatelessWidget{
         ),
       ),
 
-      home: GetLocation(),
+      home: Splash(),
     );
   }
 

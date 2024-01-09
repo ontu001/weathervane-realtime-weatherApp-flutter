@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:weathervane/screen/get_location_screen.dart';
 
-import 'home.dart';
-
 class Splash extends StatefulWidget{
   const Splash({super.key});
 
