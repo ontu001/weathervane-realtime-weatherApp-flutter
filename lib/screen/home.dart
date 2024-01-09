@@ -93,8 +93,14 @@ updateUI(widget.CurrentLoactionWeather);
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // Align to bottom left
       floatingActionButton: FloatingActionButton(
 
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
+        onPressed: () async{
+          var typeName = await Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
+
+          if(typeName != null) {
+            var wd = await WeatherModel().cityNameWeather(typeName);
+            updateUI(wd);
+
+          }
         },
         child: Icon(Icons.search, color: Colors.blueGrey.shade900, size: 30),
         shape: CircleBorder(),

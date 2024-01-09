@@ -46,7 +46,7 @@ onChanged: (value){
                 child: ElevatedButton(style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(kCommonColor)
                 ),onPressed: (){
-                  print(cityName);
+                  Navigator.pop(context, cityName);
                 }, child: Text('Search',style: TextStyle(color: Colors.blueGrey.shade900),)),
               )
             ],
