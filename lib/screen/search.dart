@@ -14,6 +14,7 @@ class Search extends StatefulWidget{
 }
 
 class SearchState extends State<Search>{
+  String cityName = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +35,19 @@ class SearchState extends State<Search>{
               ),
 
 
-              Padding(padding: EdgeInsets.symmetric(vertical: 20),child: inputFiled()),
+              Padding(padding: EdgeInsets.symmetric(vertical: 20),child: inputFiled(
+onChanged: (value){
+  cityName = value;
+},
+              )),
               SizedBox(
                 height: 60,
                 width: 200,
                 child: ElevatedButton(style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(kCommonColor)
-                ),onPressed: (){}, child: Text('Search',style: TextStyle(color: Colors.blueGrey.shade900),)),
+                ),onPressed: (){
+                  print(cityName);
+                }, child: Text('Search',style: TextStyle(color: Colors.blueGrey.shade900),)),
               )
             ],
           ),

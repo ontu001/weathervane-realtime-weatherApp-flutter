@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../utility/const.dart';
 
 class inputFiled extends StatelessWidget{
-  const inputFiled({super.key});
+  final Function(String) onChanged;
+  const inputFiled({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class inputFiled extends StatelessWidget{
       ),
       child: TextField(
         style: TextStyle(color: Colors.blueGrey.shade900,fontWeight: FontWeight.w500),
-
+onChanged: onChanged,
         decoration: InputDecoration(
           hintText: 'Search your city....',
           border: InputBorder.none,

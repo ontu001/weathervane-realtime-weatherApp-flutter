@@ -46,24 +46,24 @@ updateUI(widget.CurrentLoactionWeather);
    setState(() {
       cityName = weatherData['name'];
       status = weatherData['weather'][0]['description'];
-     double temp = weatherData['main']['temp'];
+     var temp = weatherData['main']['temp'];
      temperature =temp.toInt();
 
-
+     //
      double fl = weatherData['main']['feels_like'];
      feels_like= fl.toInt();
 
-     double mxt = weatherData['main']['temp_max'];
+     var mxt = weatherData['main']['temp_max'];
      max_temp = mxt.toInt();
 
-     double mnt = weatherData['main']['temp_min'];
+     var mnt = weatherData['main']['temp_min'];
      min_temp =mnt.toInt();
 
      humidity = weatherData['main']['humidity'];
      visibility = weatherData['visibility'];
      pressure = weatherData['main']['pressure'];
 
-     double wspd= weatherData['wind']['speed'];
+     var wspd= weatherData['wind']['speed'];
      wind_speed =wspd.toInt();
 
      time = DateTime.now();
