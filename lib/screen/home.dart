@@ -87,7 +87,6 @@ class HomeState extends State<Home> {
       var temp = weatherData['main']['temp'];
       temperature = temp.toInt();
 
-
       double fl = weatherData['main']['feels_like'];
       feels_like = fl.toInt();
 
@@ -165,97 +164,102 @@ class HomeState extends State<Home> {
 
         body: Padding(
           padding: EdgeInsets.only(left: 13, right: 13, top: 8, bottom: 85),
-          child: Center(
-            child: Column(
-              children: [
-                Text(
+          child: ListView(
+
+            children: [
+              Center(
+                child: Text(
                   DateFormat('EEEE, MMMM d, y').format(time),
                   style: TextStyle(color: kCommonColor),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: Text(
                   '$temperature°',
                   style: kTempTextStyle,
                 ),
-                Text(
+              ),
+              Center(
+                child: Text(
                   status,
                   style: kh3TextStyle,
                 ),
+              ),
 
-                //details temperature
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0, bottom: 30.0),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        detailTemp(
-                            temp_value: feels_like, tempStatus: 'Feels Like'),
-                        VerticalDivider(
-                          thickness: 2,
-                          color: Colors.grey,
-                        ),
-                        detailTemp(
-                            temp_value: max_temp, tempStatus: 'Max Temp'),
-                        VerticalDivider(
-                          thickness: 2,
-                          color: Colors.grey,
-                        ),
-                        detailTemp(
-                            temp_value: min_temp, tempStatus: 'Min Temp'),
-                      ],
-                    ),
+              //details temperature
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 30.0),
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      detailTemp(
+                          temp_value: feels_like, tempStatus: 'Feels Like'),
+                      VerticalDivider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      ),
+                      detailTemp(
+                          temp_value: max_temp, tempStatus: 'Max Temp'),
+                      VerticalDivider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      ),
+                      detailTemp(
+                          temp_value: min_temp, tempStatus: 'Min Temp'),
+                    ],
                   ),
                 ),
+              ),
 
-                //more info scrren
-                Expanded(
-                  child: bottomContainer(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            DetailScreenContainer(
-                              detailValue: '$humidity',
-                              path: 'assets/images/humidity.png',
-                              valueName: 'Humidity',
-                            ),
-                            DetailScreenContainer(
-                              detailValue: '$wind_speed',
-                              path: 'assets/images/wind_speed.png',
-                              valueName: 'Wind Speed',
-                            ),
-                          ],
-                        ),
+              //more info scrren
+              Expanded(
+                child: bottomContainer(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          DetailScreenContainer(
+                            detailValue: '$humidity',
+                            path: 'assets/images/humidity.png',
+                            valueName: 'Humidity',
+                          ),
+                          DetailScreenContainer(
+                            detailValue: '$wind_speed',
+                            path: 'assets/images/wind_speed.png',
+                            valueName: 'Wind Speed',
+                          ),
+                        ],
+                      ),
 
-                        //===========
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            DetailScreenContainer(
-                              detailValue: '$visibility',
-                              path: 'assets/images/visibility.png',
-                              valueName: 'Visibility',
-                            ),
-                            DetailScreenContainer(
-                              detailValue: '$pressure',
-                              path: 'assets/images/pressure.png',
-                              valueName: 'Pressure',
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      //===========
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          DetailScreenContainer(
+                            detailValue: '$visibility',
+                            path: 'assets/images/visibility.png',
+                            valueName: 'Visibility',
+                          ),
+                          DetailScreenContainer(
+                            detailValue: '$pressure',
+                            path: 'assets/images/pressure.png',
+                            valueName: 'Pressure',
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
+              ),
 
-                //Search button
-              ],
-            ),
+              //Search button
+            ],
           ),
         ),
       ),
