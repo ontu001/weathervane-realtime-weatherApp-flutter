@@ -225,12 +225,12 @@ class HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           DetailScreenContainer(
-                            detailValue: '$humidity',
+                            detailValue: '$humidity %',
                             path: 'assets/images/humidity.png',
                             valueName: 'Humidity',
                           ),
                           DetailScreenContainer(
-                            detailValue: '$wind_speed',
+                            detailValue: '$wind_speed km/h',
                             path: 'assets/images/wind_speed.png',
                             valueName: 'Wind Speed',
                           ),
